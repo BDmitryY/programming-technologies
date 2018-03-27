@@ -1,0 +1,49 @@
+//найти сумму всех цифр целочисленного массива
+
+
+#include "stdafx.h"
+#include <iostream>
+#include <cmath>
+#include <iomanip>
+
+using namespace std;
+int main()
+{
+	setlocale(LC_ALL, "Russian");
+	int N, i1, i2, i, j, sum = 0;
+
+	cout << "Введите размер массива ";
+	cin >> N;
+	int *mas = new int[N];
+
+	cout << "Диапазон значений массива\nот ";
+	cin >> i1;
+	cout << "до ";
+	cin >> i2;
+
+	cout << "mas = {";
+	for (i = 0; i < N; i++)
+	{
+		mas[i] = (rand() % (i2 - i1)) + i1;
+		cout << setw(5) << mas[i];
+		if ((i + 1) % 20 == 0)
+		{
+			cout << "\n       ";
+		}
+	}
+	cout << " }";
+	
+	for (i = 0; i < N; i++)
+	{
+		j = abs(mas[i]);
+		while (j > 0)
+		{
+			sum = sum + (j % 10);
+			j = j / 10;
+		}
+	}
+
+	cout << "\n\nСумма цифр массива = " << sum;
+
+	system("pause");
+}
