@@ -1,0 +1,62 @@
+//Вычислить сумму модулей элементов массива, расположенных сразу после первого отрицательного элемента массива
+
+
+#include "stdafx.h"
+#include <iostream>
+#include <cmath>
+#include <iomanip>
+
+using namespace std;
+int main()
+{
+	setlocale(LC_ALL, "Russian");
+	int N, i1, i2, i, sum=0;
+
+	cout << "Введите размер массива ";
+	cin >> N;
+	int *mas = new int[N];
+
+	cout << "Диапазон значений массива\nот ";
+	cin >> i1;
+	cout << "до ";
+	cin >> i2;
+
+	cout << "mas = {";
+	for (i = 0; i < N; i++)
+	{
+		mas[i] = (rand() % (i2 - i1)) + i1;
+		cout << setw(5) << mas[i];
+		if ((i + 1) % 20 == 0)
+		{
+			cout << "\n       ";
+		}
+	}
+	cout << " }";
+
+	i = 0;
+	while (mas[i]>=0 and i<N)
+	{
+		i++;
+	}
+	i++;
+	if (i < N)
+	{
+		for (i; i < N; i++)
+		{
+			sum = sum + abs(mas[i]);
+		}
+		cout << "\nСумма = " << sum;
+	}
+	else
+	{
+		if (i == N)
+		{
+			cout << "\nЕдинственный отрицательный элемент находится в конце массива";
+		}
+		else
+		{
+			cout << "\nВ массиве нет отрицательных элементов";
+		}
+	}
+	system("pause");
+}
