@@ -1,0 +1,56 @@
+//в одномерном массиве (целых чисел) определить 2 наименьших элемента (они могут быть равны) 
+
+
+#include "stdafx.h"
+#include <iostream>
+#include <cmath>
+#include <iomanip>
+
+using namespace std;
+
+int main()
+{
+	setlocale(LC_ALL, "Russian");
+	int N, i1, i2, i;
+	
+	cout << "Введите размер массива ";
+	cin >> N;
+	int *mas = new int[N];
+	
+	cout << "Диапазон значений массива\nот ";
+	cin >> i1;
+	cout << "до ";
+	cin >> i2;
+
+	cout << "mas = {";										
+	for (i = 0; i < N; i++)
+	{
+		mas[i] = (rand() % (i2 - i1)) + i1;
+		cout <<setw(5) << mas[i];
+		if ((i+1) % 20 == 0)
+		{
+			cout << "\n       ";
+		}
+	}
+	cout << " }";
+	
+	i1 = mas[0];
+	i2 = mas[1];
+	for (i = 2; i < N; i++)
+	{
+		if (mas[i] < i1 and i1 > i2)
+		{
+			i1 = mas[i];
+		}
+		else
+		{
+			if (mas[i] < i2)
+			{
+				i2 = mas[i];
+			}
+		}
+
+	}
+	cout <<"\n\nНаименьшие значения массива: " << i1 << " и " << i2 <<"\n\n";
+	system("pause");
+}
