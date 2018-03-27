@@ -1,0 +1,75 @@
+//необходимо сжать массив, удалив из него все элементы, величина которых находится в интервале от a до b
+//(после сдвига освободившиеся ячейки заполнить нулями)
+
+
+#include "stdafx.h"
+#include <iostream>
+#include <cmath>
+#include <iomanip>
+
+using namespace std;
+int main()
+{
+	int a, b, i1, i2, N, i, j, l=0, sum = 0;
+	setlocale(LC_ALL, "Russian");
+
+	cout << "Введите размер массива ";
+	cin >> N;
+	int *mas = new int[N];
+
+	cout << "Диапазон значений массива\nот ";
+	cin >> i1;
+	cout << "до ";
+	cin >> i2;
+
+	cout << "mas = {";
+	for (i = 0; i < N; i++)
+	{
+		mas[i] = (rand() % (i2 - i1)) + i1;
+		cout << setw(5) << mas[i];
+		if ((i + 1) % 20 == 0)
+		{
+			cout << "\n       ";
+		}
+	}
+	cout << " }";
+
+	cout << "\nВведите диапазон исключаемых элементов\nот ";
+	cin >> a;
+	cout << "до ";
+	cin >> b;
+
+	for (i = 0; i < N; i++)
+	{
+		if (mas[i] >= a and mas[i] <= b)
+		{
+			for (j = i; j < (N - 1); j++)
+			{
+				mas[j] = mas[j + 1];
+			}
+			l++;
+			if (l + i == N)
+			{
+				i = N + 1;
+			}
+			i--;
+		}
+	}
+	for (i = 0; i < l; i++)
+	{
+		mas[N - 1 - i] = 0;
+	}
+
+	cout << "mas = {";
+	for (i = 0; i < N; i++)
+	{
+		cout << setw(5) << mas[i];
+		if ((i % 20 == 0) and (i > 0))
+		{
+			cout << "\n       ";
+		}
+	}
+	cout << " }\n\n";
+
+	system("pause");
+}
