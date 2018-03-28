@@ -1,0 +1,69 @@
+// заполнить массив случайными (положительными и отрицательными) числами
+// таким образом, чтобы все числа в массиве были разными по модулю
+// в полученном массиве найти наибольшее число
+
+
+#include "stdafx.h"
+#include <iostream>
+#include <cmath>
+#include <iomanip>
+
+using namespace std;
+int main()
+{
+	setlocale(LC_ALL, "Russian");
+	int N, i1, i2, i, j;
+	bool x;
+
+	cout << "Введите размер массива ";
+	cin >> N;
+	int *mas = new int[N];
+
+	cout << "Диапазон значений массива\nот ";
+	cin >> i1;
+	cout << "до ";
+	cin >> i2;
+
+	cout << "mas = {";
+	for (i = 0; i < N; i++)
+	{
+		x = false;
+		mas[i] = (rand() % (i2 - i1)) + i1;
+
+		for (j = i; j > 0; j--)
+		{
+			if (abs(mas[i]) == abs(mas[j - 1]))
+			{
+				j = 0;
+				x = true;
+			}
+		}
+
+		if (x == true)
+		{
+			i--;
+		}
+		else
+		{
+			cout << setw(5) << mas[i];
+			if ((i + 1) % 20 == 0)
+			{
+				cout << "\n       ";
+			}
+		}
+	}
+	cout << " }";
+
+	j = mas[0];
+	for (i = 1; i < N; i++)
+	{
+		if (j < mas[i])
+		{
+			j = mas[i];
+		}
+	}
+
+	cout << "\n\nНаибольшее число = " << j <<"\n\n";
+
+	system("pause");
+}
