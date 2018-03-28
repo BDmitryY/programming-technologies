@@ -24,7 +24,7 @@ int main()
 	cout << "до ";
 	cin >> i2;
 
-	if ((N <= (abs(i1)+1) || N <= (abs(i2) +1)) and abs(i1+i2)+1 >= N)
+	if ((N <= (abs(i1)+1) || N <= (abs(i2) +1)) and abs(i2-i1)+1 >= N)
 	{
 		cout << "mas = {";
 		for (i = 0; i < N; i++)
