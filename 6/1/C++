@@ -1,0 +1,39 @@
+//Задана строка из лат. алфавита. 
+//Требуется удалить из нее повтор. символы и пробелы.
+//(если >1 - оставить 1)
+
+#include "std_lib_facilities.h"
+
+int main()
+{
+	setlocale(LC_ALL, "Russian");
+
+	cout << "Введите строку: ";
+	string str;
+	cin >> str;
+
+	int j = 0, k = 0, i = 0;
+
+	while (str[i] != '\0')
+	{
+		j = i+1;
+		while (str[j] != '\0')
+		{
+			if (str[i] == str[j])
+			{
+				k = j;
+				while (str[k] != '\0')
+				{
+					str[k] = str[k + 1];
+					k++;
+				}
+				j--;
+			}
+			j++;
+		}
+		i++;
+	}
+	cout << "\n\n" << str;
+
+	system("pause");
+}
