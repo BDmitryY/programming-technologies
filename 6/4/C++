@@ -1,0 +1,93 @@
+//Дана строка состоящая из прописных и Заглавных букв.
+//Задачи:
+//1) Посчитать кол-во Загл. и стр букв.
+//2) Если Загл. стоит вначале слова - изменить все буквы на ЗАГЛ. 
+//Если с маленькой - все с маленькой. 
+//3) Посчитать кол-во Загл и стр. букв после 2).
+
+#include "std_lib_facilities.h"
+#include <windows.h>
+int main()
+{
+	setlocale(LC_ALL, "Russian");
+	SetConsoleOutputCP(1251);
+	SetConsoleCP(1251);
+	
+	cout << "Введите строку: ";
+	string str;
+	cin >> str;
+	int n = 0;
+	while (str[n] != '\0')
+	{
+		n++;
+	}
+	int *mas = new int[n];
+
+	for (int i = 0; i < n; i++)
+	{
+		mas[i] = str[i];
+	}
+
+	int z = 0, s = 0;
+	for (int i = 0; i < n; i++)
+	{
+		if ((mas[i] >= 65 and mas[i] <= 90) || (mas[i] >= -64 and mas[i] <= -33))
+		{
+			z++;
+		}
+		else
+		{
+			if ((mas[i] >= 97 and mas[i] <= 122) || (mas[i] >= -32 and mas[i] <= -1))
+			{
+				s++;
+			}
+		}
+	}
+	cout << "\nКол-во заглавных = " << z << "\nКол-во строчных = " << s;
+
+	if ((mas[0] >= 65 and mas[0] <= 90) || (mas[0] >= -64 and mas[0] <= -33))
+	{
+		for (int i = 0; i < n; i++)
+		{
+			if ((mas[i] >= 97 and mas[i] <= 122) || (mas[i] >= -32 and mas[i] <= -1))
+			{
+				mas[i] = mas[i] - 32;
+				str[i] = mas[i];
+			}
+		}
+	}
+	else
+	{
+		for (int i = 0; i < n; i++)
+		{
+			if ((mas[i] >= 65 and mas[i] <= 90) || (mas[i] >= -64 and mas[i] <= -33))
+			{
+				mas[i] = mas[i] + 32;
+				str[i] = mas[i];
+			}
+		}
+
+	}
+
+	cout << "\n" <<"Вывод: " << str <<"\n\n";
+
+	z = 0;
+	s = 0;
+	for (int i = 0; i < n; i++)
+	{
+		if ((mas[i] >= 65 and mas[i] <= 90) || (mas[i] >= -64 and mas[i] <= -33))
+		{
+			z++;
+		}
+		else
+		{
+			if ((mas[i] >= 97 and mas[i] <= 122) || (mas[i] >= -32 and mas[i] <= -1))
+			{
+				s++;
+			}
+		}
+	}
+	cout << "\nКол-во заглавных = " << z << "\nКол-во строчных = " << s;
+
+	system("pause");
+}
