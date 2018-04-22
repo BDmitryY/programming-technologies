@@ -1,0 +1,137 @@
+//пользователь вводит слово, а программа составляет все варианты слов из букв заданного слова.
+//
+//программа не завершена
+//осуществлено составление всевозможных уникальных комбинаций из букв заданного слова
+//
+//требуется осуществить поиск, выбрав из составленных слов существующие
+//
+
+#include "std_lib_facilities.h"
+#include "windows.h"
+
+int main()
+{
+	setlocale(LC_ALL, "Russian");
+	SetConsoleCP(1251);
+	SetConsoleOutputCP(1251);
+
+	string str1;
+	cout << "Введите слово ";
+	cin >> str1;
+	int n = 0, x = 1;
+	while (str1[n] != '\0')
+	{
+		n++;
+		x = x * n;
+	}
+
+	int i;
+	char *str = new char[n];
+	for (i = 0; i < n; i++)
+	{
+		str[i] = str1[i];
+	}
+
+	char *str2 = new char[n];
+	for (i = 0; i < n; i++)
+	{
+		str2[i] = 97 + i;
+	}
+
+	int *ind = new int[n + 1];
+	ind[n] = x;
+	ind[0] = 0;
+	for (int j = 1; j < n; j++)
+	{
+		x = x / j;
+		ind[n - j] = x;
+	}
+	int *ind1 = new int[n + 1];
+	ind1[0] = ind[0];
+	ind1[1] = ind[1];
+	for (int j = 2; j <= n; j++)
+	{
+		ind1[j] = ind[j];
+		ind1[j] = ind1[j] + ind1[j - 1];
+	}
+	 
+	x = 0;
+	for (int j = 1; j <= n; j++)
+	{
+		x = x + ind[j];
+	}
+	string *mas2 = new string[x];
+	string *mas1 = new string[x];
+
+	int j, k, t, g, h = 0;
+
+	for (i = 0; i < n; i++)
+	{
+		for (k = 0; k < (i + 1); k++)
+		{
+			for (j = ind1[i]; j < ind1[i + 1]; j++)
+			{
+				if (k > 0 and (mas1[j-1][k-1] != mas1[j][k-1]))
+				{
+					h = 0;
+				}
+				t = ((j - ind1[i]) / (ind[i + 1]/ind[k + 1]) + h) % n;
+				g = k;
+				int t1 = t;
+				while (g > 0)
+				{
+					if (str2[t] == mas1[j][g - 1])
+					{
+						t = (t + 1) % n;
+						g = k;
+						h++;
+					}
+					else
+					{
+						g--;
+					}
+				}
+				mas2[j] = mas2[j] + str[t];
+				mas1[j] = mas1[j] + str2[t];
+			}
+		}
+	}
+
+	for (i = 0; i < (x-1); i++)
+	{
+		if (mas2[i] != "0")
+		{
+			for (j = (i + 1); j < x; j++)
+			{
+				if (mas2[i] == mas2[j])
+				{
+					mas2[j] = "0";
+				}
+			}
+		}
+	}
+	j = 0;
+	for (i = 0; i < x; i++)
+	{
+		if (mas2[i] != "0")
+		{
+			mas1[j] = mas2[i];
+			j++;
+		}
+	}
+
+	string *mas = new string[j];
+
+	for (i = 0; i < j; i++)
+	{
+		mas[i] = mas1[i];
+	}
+
+  cout <<"Всевозможные уникальные комбинации:\n";
+	for (i = 0; i < j; i++)
+	{
+		cout << "\n" << mas[i];
+	}
+	
+	system("pause");
+}
